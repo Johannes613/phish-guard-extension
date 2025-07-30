@@ -1,6 +1,10 @@
 import { Modal, Box, Typography, Button, Stack, Alert, AlertTitle } from '@mui/material';
+// Import the icons we need
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-// MUI uses a style object for the main modal box
+// The style object for the modal box remains the same
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -38,7 +42,7 @@ export default function ConfirmationModal({
           <AlertTitle sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}>PhishGuard Warning</AlertTitle>
           This link has a risk level of: <strong>{riskLevel}</strong>
         </Alert>
-
+        
         <Typography variant="body1" sx={{ mt: 2, mb: 1 }}>
           <strong>Reason:</strong> {riskReason}
         </Typography>
@@ -47,15 +51,31 @@ export default function ConfirmationModal({
           Do you still want to proceed to this site?
         </Typography>
 
-        <Stack direction="row" spacing={2} sx={{ mt: 3, justifyContent: 'flex-end' }}>
-          <Button variant="text" onClick={onCancel}>
+        {/* --- UPDATED BUTTONS --- */}
+        <Stack direction="row" spacing={1.5} sx={{ mt: 3, justifyContent: 'flex-end' }}>
+          <Button 
+            variant="outlined" 
+            color="secondary" 
+            onClick={onCancel}
+            startIcon={<ArrowBackIcon />}
+          >
             Go Back
           </Button>
-          <Button variant="contained" color="warning" onClick={onReport}>
-            Report Phishing
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={onReport}
+            startIcon={<ReportProblemIcon />}
+          >
+            Report
           </Button>
-          <Button variant="contained" color="error" onClick={onConfirm}>
-            Proceed Anyway
+          <Button 
+            variant="contained" 
+            color="error" 
+            onClick={onConfirm}
+            startIcon={<OpenInNewIcon />}
+          >
+            Proceed
           </Button>
         </Stack>
       </Box>

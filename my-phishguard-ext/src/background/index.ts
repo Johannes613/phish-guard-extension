@@ -1,49 +1,59 @@
 import { analyzeUrl } from '@shared/api/scanner';
 import { AnalysisResult, Message } from '@shared/types';
 
+const apiKeys = {
+  webRisk: import.meta.env.VITE_WEB_RISK_API_KEY,
+  gemini: import.meta.env.VITE_GEMINI_API_KEY,
+};
+
 const cache = new Map<string, AnalysisResult>();
 const CACHE_DURATION_MS = 10 * 60 * 1000;
 
-// The 'sender' parameter is now important
 chrome.runtime.onMessage.addListener((message: Message, sender) => {
   if (message.type === 'ANALYZE_URLS') {
-    // We now handle the response inside this function
+    if (!apiKeys.webRisk || !apiKeys.gemini) {
+      console.error("[Background] API keys are missing. Please check your .env file.");
+      return;
+    }
     handleUrlAnalysisRequest(message.urls, sender);
   }
-  // No need to return true anymore
 });
 
 async function handleUrlAnalysisRequest(urls: string[], sender: chrome.runtime.MessageSender) {
-  const results: AnalysisResult[] = [];
   const urlsToFetch: string[] = [];
+  const cachedResults: AnalysisResult[] = [];
 
   for (const url of urls) {
     if (cache.has(url)) {
-      results.push(cache.get(url)!);
+      cachedResults.push(cache.get(url)!);
     } else {
       urlsToFetch.push(url);
     }
   }
 
-  if (urlsToFetch.length > 0) {
-    const analysisPromises = urlsToFetch.map(analyzeUrl);
-    const newResults = await Promise.all(analysisPromises);
+  const analysisPromises = urlsToFetch.map(url => analyzeUrl(url, apiKeys));
+  const newResults = await Promise.all(analysisPromises);
 
-    for (const result of newResults) {
-      cache.set(result.url, result);
-      results.push(result);
-      setTimeout(() => cache.delete(result.url), CACHE_DURATION_MS);
-    }
-  }
+  newResults.forEach(result => {
+    cache.set(result.url, result);
+    setTimeout(() => cache.delete(result.url), CACHE_DURATION_MS);
+  });
 
-  console.log('[Background] Analysis complete. Sending response to tab:', sender.tab?.id);
+  const allResults = [...cachedResults, ...newResults];
+  console.log('[Background] Analysis complete. Preparing to send response...');
 
-  // --- KEY CHANGE ---
-  // Send a new message back to the content script in the specific tab
   if (sender.tab?.id) {
-    chrome.tabs.sendMessage(sender.tab.id, {
-      type: 'ANALYSIS_RESULT',
-      results: results,
-    });
+    try {
+      chrome.tabs.sendMessage(sender.tab.id, {
+        type: 'ANALYSIS_RESULT',
+        results: allResults,
+      });
+      console.log('[Background] Successfully sent response to tab:', sender.tab.id); // <-- New success log
+    } catch (error) {
+      // This will now log any error, not just the bfcache one
+      console.error('[Background] Failed to send message:', error); // <-- New error log
+    }
+  } else {
+    console.warn('[Background] Cannot send response, sender tab ID is missing.'); // <-- New warning log
   }
 }
