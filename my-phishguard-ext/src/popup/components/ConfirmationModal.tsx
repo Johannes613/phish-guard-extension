@@ -1,10 +1,8 @@
 import { Modal, Box, Typography, Button, Stack, Alert, AlertTitle } from '@mui/material';
-// Import the icons we need
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-// The style object for the modal box remains the same
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -51,7 +49,6 @@ export default function ConfirmationModal({
           Do you still want to proceed to this site?
         </Typography>
 
-        {/* --- UPDATED BUTTONS --- */}
         <Stack direction="row" spacing={1.5} sx={{ mt: 3, justifyContent: 'flex-end' }}>
           <Button 
             variant="outlined" 

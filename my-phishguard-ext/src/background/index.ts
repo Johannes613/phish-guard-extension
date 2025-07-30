@@ -48,12 +48,11 @@ async function handleUrlAnalysisRequest(urls: string[], sender: chrome.runtime.M
         type: 'ANALYSIS_RESULT',
         results: allResults,
       });
-      console.log('[Background] Successfully sent response to tab:', sender.tab.id); // <-- New success log
+      console.log('[Background] Successfully sent response to tab:', sender.tab.id); 
     } catch (error) {
-      // This will now log any error, not just the bfcache one
-      console.error('[Background] Failed to send message:', error); // <-- New error log
+      console.error('[Background] Failed to send message:', error); 
     }
   } else {
-    console.warn('[Background] Cannot send response, sender tab ID is missing.'); // <-- New warning log
+    console.warn('[Background] Cannot send response, sender tab ID is missing.'); 
   }
 }

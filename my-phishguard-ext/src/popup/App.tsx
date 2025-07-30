@@ -1,14 +1,10 @@
-// src/App.tsx
-import './index.css'; // Make sure to create/use some basic styles
+import './index.css'; 
 
 function App() {
   const handleRescan = () => {
-    // This is an example of how the popup can communicate with the content script
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0].id) {
-        // Note: For this to work, you'd need to set up a message listener
-        // in content.ts to handle a 'RESCAN_PAGE' message.
-        // For now, this is a placeholder.
+       
         console.log("Re-scan button clicked. Implement listener in content.ts");
         alert("Re-scan initiated! (See console for log)");
       }

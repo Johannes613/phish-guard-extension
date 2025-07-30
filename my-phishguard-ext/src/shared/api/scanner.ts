@@ -34,8 +34,8 @@ async function checkGoogleWebRisk(url: string, apiKey: string): Promise<Analysis
 
 async function analyzeWithGemini(url: string, apiKey: string): Promise<AnalysisResult> {
   // --- THE ONLY CHANGE IS HERE ---
-  // Changed "gemini-1.0-pro" back to "gemini-pro"
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+  // Switched to the newer, faster, and more available model.
+  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
 
   const prompt = `
     As a cybersecurity expert, analyze the following URL for phishing indicators: "${url}".
