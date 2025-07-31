@@ -94,7 +94,7 @@ document.body.addEventListener('click', (event) => {
 }, true);
 
 
-const observer = new MutationObserver((mutations) => {
+const observer = new MutationObserver(() => {
   let timer;
   clearTimeout(timer);
   timer = setTimeout(() => {

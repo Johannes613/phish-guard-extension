@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        header {
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #212529;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: #007aff;
+            border-bottom: 2px solid #007aff;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .link-card {
+            border: 1px solid #e9ecef;
+            border-left-width: 5px;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .link-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .link-card a {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .link-card a:hover {
+            text-decoration: underline;
+        }
+        .link-card .url {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #888;
+            word-break: break-all;
+            margin-top: 8px;
+            display: block;
+        }
+        /* Style cards for clarity */
+        .high-risk { border-left-color: #dc3545; }
+        .medium-risk { border-left-color: #fd7e14; }
+        .low-risk { border-left-color: #ffc107; }
+        .safe { border-left-color: #28a745; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Project PhishGuard Test Environment</h1>
+            <p class="subtitle">A page for validating link analysis and modal functionality.</p>
+        </header>
+
+        <article>
+            <p>This document contains a curated list of URLs designed to test the PhishGuard extension's detection capabilities. Clicking on a link will trigger the analysis pipeline, which includes checks against known threat databases and heuristic analysis by the Gemini AI.</p>
+
+            <h3>Test Cases</h3>
+
+            <div class="link-card high-risk">
+                <a href="http://known-malware-site.com">High Risk (Malware)</a>
+                <span class="url">http://known-malware-site.com</span>
+            </div>
+
+            <div class="link-card high-risk">
+                <a href="http://bank-of-your-name.secure-login.com">High Risk (Phishing)</a>
+                <span class="url">http://bank-of-your-name.secure-login.com</span>
+            </div>
+
+            <div class="link-card medium-risk">
+                <a href="http://update-your-account.info">Medium Risk</a>
+                <span class="url">http://update-your-account.info</span>
+            </div>
+
+            <div class="link-card low-risk">
+                <a href="http://123.45.67.89">Low Risk</a>
+                <span class="url">http://123.45.67.89</span>
+            </div>
+            
+            <div class="link-card safe">
+                <a href="http://a-totally-normal-site.com">Safe Link</a>
+                <span class="url">http://a-totally-normal-site.com</span>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
