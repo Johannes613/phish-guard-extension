@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 1000px; margin: auto; padding: 20px;">
-  <h1>PhishGuard: AI-Powered Real-Time Phishing Link Detector</h1>
+  <h1>PhishGuard: An Intelligent Phishing Link Detector</h1>
 
   <div style="margin-bottom: 20px;">
     <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge">
@@ -18,10 +18,9 @@
   <hr/>
 
   <h2>Live Demo</h2>
-  <p><em>As a browser extension, PhishGuard is installed directly into your browser. The demo below shows it in action on a webpage.</em></p>
   
   <h3>Application Demo</h3>
- <img src="https://i.imgur.com/mJ2N92X.gif" 
+ <img src="https://github.com/user-attachments/assets/e44cc2e5-4cf7-437e-ae6c-0dcea061f720" 
        alt="PhishGuard in action, showing a warning modal when a risky link is clicked." 
        style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px;" />
 
@@ -57,7 +56,6 @@
   <ul>
     <li><strong>Custom Warning Modal:</strong> When a user clicks on a risky link, a professional Material-UI modal appears, preventing immediate navigation.</li>
     <li><strong>AI-Generated Descriptions:</strong> The modal displays the risk level and a concise, AI-generated reason for the warning, explaining why the link is considered dangerous.</li>
-    <li><strong>User Control:</strong> The user is given clear options to "Go Back" to safety, "Proceed Anyway" if they trust the link, or "Report Phishing".</li>
   </ul>
 
   <hr/>
