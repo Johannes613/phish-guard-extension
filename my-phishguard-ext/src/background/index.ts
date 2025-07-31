@@ -33,26 +33,26 @@ async function handleUrlAnalysisRequest(urls: string[], sender: chrome.runtime.M
 
   const analysisPromises = urlsToFetch.map(url => analyzeUrl(url, apiKeys));
   const newResults = await Promise.all(analysisPromises);
-
+  
   newResults.forEach(result => {
     cache.set(result.url, result);
     setTimeout(() => cache.delete(result.url), CACHE_DURATION_MS);
   });
-
+  
   const allResults = [...cachedResults, ...newResults];
   console.log('[Background] Analysis complete. Preparing to send response...');
 
   if (sender.tab?.id) {
     try {
-      chrome.tabs.sendMessage(sender.tab.id, {
+      await chrome.tabs.sendMessage(sender.tab.id, {
         type: 'ANALYSIS_RESULT',
         results: allResults,
       });
-      console.log('[Background] Successfully sent response to tab:', sender.tab.id); 
+      console.log('[Background] Successfully sent response to tab:', sender.tab.id);
     } catch (error) {
-      console.error('[Background] Failed to send message:', error); 
+      console.warn(`[Background] Could not send message to tab ${sender.tab.id}. It was likely closed or reloaded.`);
     }
   } else {
-    console.warn('[Background] Cannot send response, sender tab ID is missing.'); 
+    console.warn('[Background] Cannot send response, sender tab ID is missing.');
   }
 }

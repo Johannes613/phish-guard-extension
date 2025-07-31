@@ -33,10 +33,7 @@ async function checkGoogleWebRisk(url: string, apiKey: string): Promise<Analysis
 }
 
 async function analyzeWithGemini(url: string, apiKey: string): Promise<AnalysisResult> {
-  // --- THE ONLY CHANGE IS HERE ---
-  // Switched to the newer, faster, and more available model.
   const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
-
   const prompt = `
     As a cybersecurity expert, analyze the following URL for phishing indicators: "${url}".
     Consider domain age, subdomains, suspicious keywords (login, secure, account, verify), TLD, and character substitution.
@@ -56,7 +53,13 @@ async function analyzeWithGemini(url: string, apiKey: string): Promise<AnalysisR
     }
 
     const data = await response.json();
-    const jsonString = data.candidates[0].content.parts[0].text;
+    let jsonString = data.candidates[0].content.parts[0].text;
+
+    const jsonMatch = jsonString.match(/{[\s\S]*}/);
+    if (jsonMatch) {
+      jsonString = jsonMatch[0];
+    }
+
     const aiResult: { riskLevel: RiskLevel; reason: string } = JSON.parse(jsonString);
     return { url, ...aiResult };
   } catch (error) {

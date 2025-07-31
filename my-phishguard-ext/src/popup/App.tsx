@@ -4,7 +4,6 @@ function App() {
   const handleRescan = () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0].id) {
-       
         console.log("Re-scan button clicked. Implement listener in content.ts");
         alert("Re-scan initiated! (See console for log)");
       }
@@ -13,7 +12,6 @@ function App() {
 
   return (
     <div style={{ width: '250px', padding: '16px', textAlign: 'center' }}>
-      <img src="/icon128.png" alt="PhishGuard Logo" style={{ width: '60px', marginBottom: '12px' }}/>
       <h1 style={{ fontSize: '1.2em', margin: '0 0 8px 0' }}>PhishGuard</h1>
       <p style={{ fontSize: '0.9em', margin: '0 0 16px 0' }}>Actively protecting you from phishing.</p>
       <button onClick={handleRescan}>

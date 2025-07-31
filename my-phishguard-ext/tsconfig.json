@@ -18,8 +18,8 @@
     "types": ["chrome", "node"],
     "baseUrl": ".",
     "paths": {
-      "@background/*": ["src/background/*"],
-      "@content/*": ["src/content/*"],
+      "@background/*": ["src/configuration/*"],
+      "@content/*": ["src/message/*"],
       "@popup/*": ["src/popup/*"],
       "@shared/*": ["src/shared/*"]
     }
