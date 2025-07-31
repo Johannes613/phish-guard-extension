@@ -19,7 +19,7 @@
 
   <h2>Live Demo</h2>
   
-  <h3>Application Demo</h3>
+  <h3>Extension Demo</h3>
  <img src="https://github.com/user-attachments/assets/e44cc2e5-4cf7-437e-ae6c-0dcea061f720" 
        alt="PhishGuard in action, showing a warning modal when a risky link is clicked." 
        style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px;" />
